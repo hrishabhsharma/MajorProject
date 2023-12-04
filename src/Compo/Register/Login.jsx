@@ -32,6 +32,7 @@ function Login() {
                         localStorage.setItem("token", res.data.token);
                         console.log(res.data.userdetail)
                         navigate("/");
+                        window.location.reload(true)
                     }
                 })
                 .catch(err => console.log(err));

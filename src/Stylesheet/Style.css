@@ -157,6 +157,9 @@ nav{
 }
 
 .profilediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
     box-sizing: border-box;
     /* border: 2px solid red; */
@@ -180,7 +183,6 @@ nav{
 
 .spanclass {
     display: inline-block;
-    margin-top: 20%;
     font-size: medium;
     font-weight: bold;
     color: white;
