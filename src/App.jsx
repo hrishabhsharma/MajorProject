@@ -1,20 +1,22 @@
-// import { Box } from "@mui/material"
-import Header from "./components/Header/Header"
-import './style/props.css'
+// import logo from './logo.svg';
+// import './App.css';
+import './Stylesheet/Style.css';
+import RouteCompo from './RouterCompo/RouteCompo';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
-const App = () => {
-
+function App() {
+  const initialOptions = {
+    clientId: "Ac5ve0-bGb14hMh5AbWFnOiEwBgkMgsl0wzD09hwTt9E1hCb1yuL_SzmqEhO9t-JERF__iC7t9g_fT3v",
+    currency: "USD",
+    intent: "capture",
+  };
   return (
-    <>
-      <Header />
-      {/* <Box
-        component="img"
-        sx={{ height: 400 }}
-        alt="Logo"
-        src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/1c1f8809-69ec-43d7-8770-a145a714df9e.jpg"
-      /> */}
-    </>
-  )
+    <PayPalScriptProvider options={initialOptions}>
+      <div className="App">
+        <RouteCompo />
+      </div>
+    </PayPalScriptProvider>
+  );
 }
 
-export default App
+export default App;
