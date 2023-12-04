@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import { FcGoogle } from "react-icons/fc";
@@ -11,7 +11,7 @@ function Login() {
         email: "",
         pass: ""
     })
-    const navi = useNavigate();
+    const navigate = useNavigate();
     const handleInput = (event) => {
         setData({ ...data, [event.target.name]: event.target.value })
     }
@@ -31,7 +31,7 @@ function Login() {
                     if (res.data.msg === "User Logged in Successfully!") {
                         localStorage.setItem("token", res.data.token);
                         console.log(res.data.userdetail)
-                        navi("/");
+                        navigate("/");
                     }
                 })
                 .catch(err => console.log(err));
@@ -73,7 +73,7 @@ function Login() {
                     <button className='reg_submit' onClick={handleSubmit}>Log in</button>
                     <p style={{ textAlign: "center" }}>or <span className='loginspan'>Forgot Password</span></p>
                     <hr />
-                    <NavLink to="/register" className="navdeco"><h4 className='navdeco'>Don't have an account? <span className='loginspan'>Sign up</span></h4></NavLink>
+                    <NavLink to="/register" className="navdeco"><h4 className='navdeco'>Don&apos;t have an account? <span className='loginspan'>Sign up</span></h4></NavLink>
                     <p className='loginorg'>Log in with your organization</p>
                 </form>
             </div>

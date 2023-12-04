@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { storeData } from '../DataStore/DataStore'
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import RatingStars from './RatingStars';
 import { FaStar } from 'react-icons/fa';
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -12,12 +12,36 @@ function CategoriesPage() {
     const [videoview, setvideo] = useState(true);
     const [datas] = useContext(storeData);
     console.log(datas);
-    const devcatname = ["web development", "data science", "mobile development", "programming language"];
-    const buscatname = ["entrepreneurship", "communication", "management", "sales"];
-    const poptopics = ["Python", "Data Science", "React JS", "Java", "c#(Programming Language)", "Web Development", "Javascript", "Unreal Engine", "Machine Learning", "Deep Learning"]
+    const poptopics = ["Python", "Data Science", "React JS", "Java", "c#", "Web Development", "Javascript", "Unreal Engine", "Machine Learning", "Deep Learning"]
     const name = useParams().name;
     console.log(name);
-    let subcats = [];
+    const categoriesMap = {
+        development: ["web development", "data science", "mobile development", "programming language"],
+        business: ["entrepreneurship", "communication", "management", "sales"],
+        "Finance & Accounting": ["Accounting & Bookkeeping", "Compliance", "Cryptocurrency & Blockchain", "Economics", "Finance"],
+        "IT & Software": ["IT Certifications", "Network & Security", "Hardware", "Operating Systems & Servers", "Other IT & Software"],
+        "Office Productivity": ["Microsoft", "Apple", "Google", "SAP", "Oracle"],
+        "Personal Development": ["Personal Transformation", "Personal Productivity", "Leadership", "Career Development", "Parenting & Relationships"],
+        "Teaching & Academics": ["Engineering", "Humanities", "Math", "Science", "Online Education"],
+        Music: ["Instruments", "Music Production", "Music Fundamentals", "Vocal", "Music Techniques"],
+        "Health & Fitness": ["Fitness", "General Health", "Sports", "Nutrition & Diet", "Yoga"],
+        "Photography & Video": ["Digital Photography", "Photography", "Portrait Photography", "Photography Tools", "Commercial Photography"],
+        Lifestyle: ["Arts & Crafts", "Beauty & Makeup", "Esoteric Practices", "Food & Beverage", "Gaming"],
+        Marketing: ["Digital Marketing", "Search Engine Optimization", "Social Media Marketing", "Branding", "Marketing Fundamentals"],
+        Design: ["Web Design", "Graphic Design & Illustration", "Design Tools", "User Experience Design", "Game Design"],
+    };
+    const subcats = categoriesMap[name] || [];
+    let mainCategory;
+    let mainCategorySubcats = [];
+    if (!subcats.includes(name)) {
+        Object.entries(categoriesMap).forEach(([category, subcategories]) => {
+            if (subcategories.includes(name)) {
+                mainCategory = category;
+                mainCategorySubcats = subcategories;
+            }
+        });
+    }
+    const displaySubnav = mainCategory && mainCategorySubcats.length > 0;
     const instructors = [
         {
             name: "Dr. Angela Yu",
@@ -52,12 +76,11 @@ function CategoriesPage() {
             img: "https://img-c.udemycdn.com/user/75x75/9685726_67e7_4.jpg"
         }
     ]
-
-    if (name === "development") {
-        subcats = devcatname;
-    } else if (name === "business") {
-        subcats = buscatname;
-    }
+    // if (name === "development") {
+    //     subcats = devcatname;
+    // } else if (name === "business") {
+    //     subcats = buscatname;
+    // }
     console.log(subcats);
     let subcat = "";
     let dummycat = datas.find((item) => {
@@ -79,6 +102,7 @@ function CategoriesPage() {
     const filtereddatas = datas.filter(item => item.category === name || item.subcategory === name);
     console.log(filtereddatas);
     const [isHovered, setIsHovered] = useState(null);
+    const [ishoveredtwo, setIsHoveredtwo] = useState(null);
 
     const handleContainerHover = (index) => {
         setIsHovered(index);
@@ -87,16 +111,39 @@ function CategoriesPage() {
     const handleContainerLeave = () => {
         setIsHovered(null);
     };
+    const handleContainerHovertwo = (index) => {
+        setIsHoveredtwo(index);
+    }
+    const handleContainerLeavetwo = () => {
+        setIsHoveredtwo(null);
+    }
     return (
         <div>
             <div className='navsub'>
-                <h5>{name}</h5>
-                <div className='arrowimg'>
-                    <img src='https://s.udemycdn.com/browse_components/link-bar/large-next.svg' alt='not found' className='imgfil' />
-                </div>
+                {displaySubnav ? (
+                    <>
+                        <NavLink className="textdeconone" to={`/category/${mainCategory}`}><h5>{mainCategory}</h5></NavLink>
+                        <div className='arrowimg'>
+                            <img src='https://s.udemycdn.com/browse_components/link-bar/large-next.svg' alt='not found' className='imgfil' />
+                        </div>
+                        {mainCategorySubcats.map((item, index) => {
+                            return (
+                                <NavLink key={index} className="textdeconone" to={`/category/${item}`}><h5 key={index} className='h5normal'>{item}</h5></NavLink>
+                            )
+                        })}
+                    </>
+                ) : (
+                    <>
+                        <NavLink className="textdeconone" to={`/category/${name}`}><h5>{name}</h5></NavLink>
+                        <div className='arrowimg'>
+                            <img src='https://s.udemycdn.com/browse_components/link-bar/large-next.svg' alt='not found' className='imgfil' />
+                        </div>
+                    </>
+                )}
+
                 {subcats.map((item, index) => {
                     return (
-                        <h5 key={index} className='h5normal'>{item}</h5>
+                        <NavLink key={index} className="textdeconone" to={`/category/${item}`}><h5 key={index} className='h5normal'>{item}</h5></NavLink>
                     )
                 })}
             </div>
@@ -116,19 +163,12 @@ function CategoriesPage() {
                                 <div className='mostpop_img'>
                                     <img src={item.image} alt='not found' className='imgfil' />
                                 </div>
-                                <div className='topicitem'>
-                                    <h5 className='topicfont'>{item.courseName}</h5>
-                                    <p className='pmargin'>{item.creator}</p>
-                                    <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
-                                    <h4 style={{ marginTop: "1%" }}>₹{item.offerPrice}</h4>
-                                    {bestsel && <h4 className='bestsel'>Bestseller</h4>}
-                                </div>
                                 {isHovered === index && (
                                     <div className='arrow-container'>
                                         <div className="arrow"></div>
                                         <div className='additional-content'>
                                             <h4 style={{ margin: 0 }}>{item.courseName}</h4>
-                                            <h5>What you'll learn</h5>
+                                            <h5>What you&apos;ll learn</h5>
                                             <ul className='pointlist'>
                                                 <li>{item.point1}</li>
                                                 <li>{item.point2}</li>
@@ -143,6 +183,14 @@ function CategoriesPage() {
                                         </div>
                                     </div>
                                 )}
+                                <div className='topicitem'>
+                                    <h5 className='topicfont'>{item.courseName}</h5>
+                                    <p className='pmargin'>{item.creator}</p>
+                                    <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
+                                    <h4 style={{ marginTop: "1%" }}>₹{item.offerPrice}</h4>
+                                    {bestsel && <h4 className='bestsel'>Bestseller</h4>}
+                                </div>
+
                             </div>
                         )
                     })}
@@ -152,7 +200,7 @@ function CategoriesPage() {
                     <div className='popmain_div'>
                         {poptopics.map((item, index) => {
                             return (
-                                <p className='poptopics'>{item}</p>
+                                <p key={index} className='poptopics'>{item}</p>
                             )
                         })}
                     </div>
@@ -191,7 +239,7 @@ function CategoriesPage() {
                                     <div className='stars_div'>
                                         <input name='star' type='radio'></input>
                                         <RatingStars rating={4.5} />
-                                        <p style={{ margin: 0 }}>&nbsp;4.5 & up (10,000)</p>
+                                        <p className="starratingnum" style={{ margin: 0 }}>&nbsp;4.5 & up (10,000)</p>
                                     </div>
                                     <div className='stars_div'>
                                         <input name='star' type='radio'></input>
@@ -267,10 +315,30 @@ function CategoriesPage() {
                             {filtereddatas.slice(0, 8).map((item, index) => {
                                 return (
                                     <div key={index}>
-                                        <div className='item_maindiv'>
+                                        <div className={`item_maindiv ${ishoveredtwo === index ? 'hovered' : ''}`} onMouseEnter={() => handleContainerHovertwo(index)} onMouseLeave={handleContainerLeavetwo}>
                                             <div className='item_imgdiv'>
                                                 <img src={item.image} alt='not found' className='imgfil' />
                                             </div>
+                                            {ishoveredtwo === index && (
+                                                <div className='arrow-containertwo'>
+                                                    <div className="arrow"></div>
+                                                    <div className='additional-content'>
+                                                        <h4 style={{ margin: 0 }}>{item.courseName}</h4>
+                                                        <h5>What you&apos;ll learn</h5>
+                                                        <ul className='pointlist'>
+                                                            <li>{item.point1}</li>
+                                                            <li>{item.point2}</li>
+                                                            <li>{item.point3}</li>
+                                                        </ul>
+                                                        <div className='buttondiv'>
+                                                            <CartButton item={item} />
+                                                            <div className='heartbutton_img'>
+                                                                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf9nKX4mmWawwlgehpJGHNxT5OcxKVlRsIzA&usqp=CAU' alt='not found' className='imgfil' />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
                                             <div className='item_contentdiv'>
                                                 <h4 className='padd'>{item.courseName}</h4>
                                                 <p className='padd'>{item.creator}</p>
@@ -280,6 +348,7 @@ function CategoriesPage() {
                                             <div className='item_pricediv'>
                                                 <h4>₹{item.offerPrice}</h4>
                                             </div>
+
                                         </div>
                                         <hr />
                                     </div>

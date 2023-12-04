@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 import axios from 'axios';
 
 function Register() {
-    const navi = useNavigate();
+    const navigate = useNavigate();
     const [data, setData] = useState({
         uname: "",
         email: "",
@@ -30,10 +30,8 @@ function Register() {
                 .then((res) => {
                     console.log(res.data);
                     alert(res.data.msg);
-                    if (res.data.msg === "User Registered Successfully!") {
-                        localStorage.setItem("token", res.data.token);
-                        navi("/");
-                    }
+                    alert("Please login!");
+                    navigate("/login");
                 })
                 .catch(err => console.log(err));
             setData({ uname: "", email: "", pass: "" });

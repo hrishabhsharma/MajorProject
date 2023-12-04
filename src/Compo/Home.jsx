@@ -1,4 +1,3 @@
-import React from 'react'
 import ImageCarousel from './ImageCarousel'
 import { MdPlayCircle } from "react-icons/md";
 import Footer from './Footer';

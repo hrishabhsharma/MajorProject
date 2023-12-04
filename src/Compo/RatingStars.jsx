@@ -1,9 +1,5 @@
-// RatingStars.js
-import React from 'react';
 import { FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
-
-// import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { FaStarHalfAlt } from "react-icons/fa";
 
 function RatingStars({ rating }) {
