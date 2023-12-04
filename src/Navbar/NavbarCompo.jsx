@@ -6,6 +6,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Category, SubCategory } from '../helper';
 
 function NavbarCompo() {
+  const token = localStorage.getItem("token")
   const [isDropDown, setIsDropDown] = useState(false);
   const [selectOption, setSelectOption] = useState(0);
 
@@ -68,9 +69,15 @@ function NavbarCompo() {
       </div>
       <div className='butdiv_nav'>
         <div className='logbut_nav'>
-          <NavLink style={{ color: "black", textDecoration: "none" }} to="/login">
-            <h5>Log in</h5>
-          </NavLink>
+          {
+            token
+              ? <NavLink onClick={() => { localStorage.clear(); window.location.reload(true) }} style={{ color: "black", textDecoration: "none" }} to="/">
+                <h5>Log Out</h5>
+              </NavLink>
+              : <NavLink style={{ color: "black", textDecoration: "none" }} to="/login">
+                <h5>Log in</h5>
+              </NavLink>
+          }
         </div>
         <div className='logbut_nav signupbut'>
           <NavLink style={{ color: "white", textDecoration: "none" }} to="/register">

@@ -62,7 +62,7 @@ function CartPage() {
                                 <h3>Total:</h3>
                                 <h1>₹{totalcost}</h1>
                                 {!toggle ? <button onClick={buynow} className='checkout_but'>Checkout</button> : ""}
-                                {toggle ? <PaypalPayment cartData={itemsInCart} totalAmount={totalcost} /> : ""}
+                                {toggle ? <PaypalPayment totalAmount={totalcost} /> : ""}
                                 <hr />
                                 <h4>Promotions</h4>
                                 <input type='text' className='coupontext' placeholder='Enter Coupon' />
