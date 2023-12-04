@@ -1,6 +1,6 @@
 const pageData = {
-  "development": ["web development", "data science", "mobile development", "programming language"],
-  "business": ["entrepreneurship", "communication", "management", "sales"],
+  "development": ["web development", "data science", "mobile development", "programming language", 'game development'],
+  "business": ["entrepreneurship", "communication", "management", "sales", "operations"],
   "Finance & Accounting": ["Accounting & Bookkeeping", "Compliance", "Cryptocurrency & Blockchain", "Economics", "Finance"],
   "IT & Software": ["IT Certifications", "Network & Security", "Hardware", "Operating Systems & Servers", "Other IT & Software"],
   "Office Productivity": ["Microsoft", "Apple", "Google", "SAP", "Oracle"],

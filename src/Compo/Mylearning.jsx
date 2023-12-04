@@ -56,8 +56,8 @@ function Mylearning() {
                                         <img src={item.image} alt='not found' className='imgfil' />
                                     </div>
                                     <div className='topicitem'>
-                                        <h5 className='topicfont'>{item.courseName}</h5>
-                                        <p className='pmargin'>{item.creator}</p>
+                                        <h5 className='topicfont'>{item.topic}</h5>
+                                        <p className='pmargin'>{item.instructor}</p>
                                         <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
 
                                     </div>

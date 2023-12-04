@@ -167,7 +167,7 @@ function CategoriesPage() {
                                     <div className='arrow-container'>
                                         <div className="arrow"></div>
                                         <div className='additional-content'>
-                                            <h4 style={{ margin: 0 }}>{item.courseName}</h4>
+                                            <h4 style={{ margin: 0 }}>{item.topic}</h4>
                                             <h5>What you&apos;ll learn</h5>
                                             <ul className='pointlist'>
                                                 <li>{item.point1}</li>
@@ -184,8 +184,8 @@ function CategoriesPage() {
                                     </div>
                                 )}
                                 <div className='topicitem'>
-                                    <h5 className='topicfont'>{item.courseName}</h5>
-                                    <p className='pmargin'>{item.creator}</p>
+                                    <h5 className='topicfont'>{item.topic}</h5>
+                                    <p className='pmargin'>{item.instructor}</p>
                                     <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
                                     <h4 style={{ marginTop: "1%" }}>₹{item.offerPrice}</h4>
                                     {bestsel && <h4 className='bestsel'>Bestseller</h4>}
@@ -323,7 +323,7 @@ function CategoriesPage() {
                                                 <div className='arrow-containertwo'>
                                                     <div className="arrow"></div>
                                                     <div className='additional-content'>
-                                                        <h4 style={{ margin: 0 }}>{item.courseName}</h4>
+                                                        <h4 style={{ margin: 0 }}>{item.topic}</h4>
                                                         <h5>What you&apos;ll learn</h5>
                                                         <ul className='pointlist'>
                                                             <li>{item.point1}</li>
@@ -340,10 +340,10 @@ function CategoriesPage() {
                                                 </div>
                                             )}
                                             <div className='item_contentdiv'>
-                                                <h4 className='padd'>{item.courseName}</h4>
-                                                <p className='padd'>{item.creator}</p>
+                                                <h4 className='padd'>{item.topic}</h4>
+                                                <p className='padd'>{item.instructor}</p>
                                                 <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
-                                                <p className='padd'>{item.hrs} total hours . {item.lectures} lectures . All levels</p>
+                                                <p className='padd'>{item.duration} total hours . {item.lectures} lectures . All levels</p>
                                             </div>
                                             <div className='item_pricediv'>
                                                 <h4>₹{item.offerPrice}</h4>

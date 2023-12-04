@@ -56,10 +56,10 @@ function CartPage() {
                           <img src={item.image} className='imgfil' alt="not found" />
                         </div>
                         <div className='cartitem_contentdiv'>
-                          <h4 className='padd'>{item.courseName}</h4>
-                          <p className='padd'>By {item.creator}</p>
+                          <h4 className='padd'>{item.topic}</h4>
+                          <p className='padd'>By {item.instructor}</p>
                           <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
-                          <p className='padd'>{item.hrs} total hours . {item.lectures} lectures . All levels</p>
+                          <p className='padd'>{item.duration} total hours . {item.lectures} lectures . All levels</p>
                         </div>
                         <div className='remove_div'>
                           <p style={{ color: "blueviolet", textDecoration: "underline", cursor: "pointer" }} onClick={() => handleDelete(item)}>Remove</p>

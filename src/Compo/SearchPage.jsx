@@ -119,7 +119,7 @@ function SearchPage() {
                                                 <div className='arrow-containertwo'>
                                                     <div className="arrow"></div>
                                                     <div className='additional-content'>
-                                                        <h4 style={{ margin: 0 }}>{item.courseName}</h4>
+                                                        <h4 style={{ margin: 0 }}>{item.topic}</h4>
                                                         <h5>What you&apos;ll learn</h5>
                                                         <ul className='pointlist'>
                                                             <li>{item.point1}</li>
@@ -136,10 +136,10 @@ function SearchPage() {
                                                 </div>
                                             )}
                                             <div className='item_contentdiv'>
-                                                <h4 className='padd'>{item.courseName}</h4>
-                                                <p className='padd'>{item.creator}</p>
+                                                <h4 className='padd'>{item.topic}</h4>
+                                                <p className='padd'>{item.instructor}</p>
                                                 <div className='rating_div'>{item.rating}<div><RatingStars rating={item.rating} /></div>(3256)</div>
-                                                <p className='padd'>{item.hrs} total hours . {item.lectures} lectures . All levels</p>
+                                                <p className='padd'>{item.duration} total hours . {item.lectures} lectures . All levels</p>
                                             </div>
                                             <div className='item_pricediv'>
                                                 <h4>₹{item.offerPrice}</h4>

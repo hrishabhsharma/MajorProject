@@ -15,11 +15,11 @@ const CartSlice = createSlice({
             // console.log("cart item", action.payload);
             const existingItemIndex = state.itemsInCart.findIndex(item => item.id === action.payload.id);
             if (existingItemIndex !== -1) {
-                alert("Item: " + action.payload.courseName + " is already added to the cart!");
+                alert("Item: " + action.payload.topic + " is already added to the cart!");
             }
             else {
                 state.itemsInCart.push({ ...action.payload, quantity: 1 });
-                alert("Item: " + action.payload.courseName + " added successfully!");
+                alert("Item: " + action.payload.topic + " added successfully!");
             }
             state.totalAmount = calculateTotalAmount(state.itemsInCart);
             console.log(Array.from(state.itemsInCart));
